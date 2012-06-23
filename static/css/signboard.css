@@ -4,12 +4,22 @@
 
 .columnGroup {
     float: left;
+    margin: 2px;
+}
+
+.columnGroup > h2 {
+    text-align: center;
 }
 
 .column {
     width: 185px;
-    border: 1px solid red;
+    height: 350px;
+    border: 1px solid red; /* Temporary, for visualization purposes. */
     float: left;
+}
+
+.column > h3 {
+    text-align: center;
 }
 
 .cardList {
@@ -20,7 +30,7 @@
 
 .card {
     max-height: 120px;
-    border: 1px solid black;
+    border: 1px solid black; /* Temporary, for visualization purposes. */
     margin: 2px;
     overflow: hidden;
 }

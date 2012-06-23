@@ -19,7 +19,9 @@
     <div class="appContainer">
         <div data-ng-app="Signboard" data-ng-controller="BoardCtrl" class="board">
             <div data-ng-repeat="columnGroup in signboard.columnGroups" class="columnGroup">
+                <h2>{* columnGroup.name *}</h2>
                 <div data-ng-repeat="column in columnGroup.columns" data-ng-controller="ColumnCtrl" class="column">
+                    <h3>{* column.name *}</h3>
                     <ul class="cardList">
                         <li data-ng-repeat="card in column.cards" data-ng-controller="CardCtrl" class="card">
                             <h4 data-ng-click="toggleCollapsed()">{* card.name *}</h4>
