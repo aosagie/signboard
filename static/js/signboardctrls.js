@@ -18,6 +18,11 @@ function ColumnCtrl($scope) {
 }
 
 function CardCtrl($scope) {
+
+    $scope.toggleCollapsed = function() {
+        $scope.collapsed = !$scope.collapsed;
+    };
+
 }
 
 angular.module('Signboard', [], function ($interpolateProvider) {

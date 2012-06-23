@@ -19,8 +19,7 @@
 }
 
 .card {
-    width: 180px;
-    height: 120px;
+    max-height: 120px;
     border: 1px solid black;
     margin: 2px;
     overflow: hidden;

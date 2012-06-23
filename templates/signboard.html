@@ -22,8 +22,8 @@
                 <div data-ng-repeat="column in columnGroup.columns" data-ng-controller="ColumnCtrl" class="column">
                     <ul class="cardList">
                         <li data-ng-repeat="card in column.cards" data-ng-controller="CardCtrl" class="card">
-                            <h4>{* card.name *}</h4>
-                            <div>{* card.description *}</div>
+                            <h4 data-ng-click="toggleCollapsed()">{* card.name *}</h4>
+                            <div data-ng-hide="collapsed">{* card.description *}</div>
                         </li>
                     </ul>
                 </div>
