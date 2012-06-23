@@ -1,0 +1,18 @@
+.board {
+}
+
+.columnGroup {
+}
+
+.column {
+    width: 100px;
+}
+
+.cardList {
+    list-style: none;
+}
+
+.card {
+    width: 95px;
+    height: 95px;
+}
