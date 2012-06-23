@@ -7,7 +7,7 @@
     margin: 2px;
 }
 
-.columnGroup > h2 {
+h2 {
     text-align: center;
 }
 
@@ -18,7 +18,7 @@
     float: left;
 }
 
-.column > h3 {
+h3 {
     text-align: center;
 }
 

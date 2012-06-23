@@ -14,9 +14,6 @@ function BoardCtrl($scope, $http, $log) {
 
 }
 
-function ColumnCtrl($scope) {
-}
-
 function CardCtrl($scope) {
 
     $scope.toggleCollapsed = function() {
@@ -25,6 +22,6 @@ function CardCtrl($scope) {
 
 }
 
-angular.module('Signboard', [], function ($interpolateProvider) {
+angular.module('Signboard', ["SignboardComponents"], function ($interpolateProvider) {
     $interpolateProvider.startSymbol("{*").endSymbol("*}"); //Default symbols conflict with Jinja2
 });

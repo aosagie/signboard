@@ -1,6 +1,20 @@
 {
     "name": "My Kanban Board",
     "creationDate": 1340478531851,
+    "cards": {
+        "id1": {
+            "name": "Web-based Kanban",
+            "creationDate": 1340478531851,
+            "updateDate": 1340478531851,
+            "description": "A Kanban board using Flask and AngularJS"
+        },
+        "id2": {
+            "name": "UX Recorder",
+            "creationDate": 1340478531851,
+            "updateDate": 1340478531851,
+            "description": "A python script that monitors and records user-computer interactions"
+        }
+    },
     "columnGroups": [
         {
             "name": "Goals",
@@ -8,20 +22,7 @@
             "columns": [
                 {
                     "max": 10,
-                    "cards": [
-                        {
-                            "name": "Web-based Kanban",
-                            "creationDate": 1340478531851,
-                            "updateDate": 1340478531851,
-                            "description": "A Kanban board using Flask and AngularJS"
-                        },
-                        {
-                            "name": "UX Recorder",
-                            "creationDate": 1340478531851,
-                            "updateDate": 1340478531851,
-                            "description": "A python script that monitors and records user-computer interactions"
-                        }
-                    ]
+                    "cardIds": [ "id1" ]
                 }
             ]
         },

@@ -4,7 +4,8 @@
     <script src="{{ url_for('static', filename='js/lib/angular-1.0.0.js') }}"></script>
     {{ super() }}
     <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.21.custom.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/signboardctrls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/signboardCtrls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/signboardComponents.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signboard.css') }}">
 {% endblock %}
 {% block content %}
@@ -19,16 +20,7 @@
     <div class="appContainer">
         <div data-ng-app="Signboard" data-ng-controller="BoardCtrl" class="board">
             <div data-ng-repeat="columnGroup in signboard.columnGroups" class="columnGroup">
-                <h2>{* columnGroup.name *}</h2>
-                <div data-ng-repeat="column in columnGroup.columns" data-ng-controller="ColumnCtrl" class="column">
-                    <h3>{* column.name *}</h3>
-                    <ul class="cardList">
-                        <li data-ng-repeat="card in column.cards" data-ng-controller="CardCtrl" class="card">
-                            <h4 data-ng-click="toggleCollapsed()">{* card.name *}</h4>
-                            <div data-ng-hide="collapsed">{* card.description *}</div>
-                        </li>
-                    </ul>
-                </div>
+                <column-group model="columnGroup" cards="signboard.cards"/>
             </div>
             <div class="clear"/>
 
