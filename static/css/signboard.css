@@ -1,4 +1,5 @@
 .board {
+    margin: auto;
 }
 
 .columnGroup {
@@ -13,6 +14,9 @@
 }
 
 .card {
-    width: 95px;
-    height: 95px;
+    width: 180px;
+    height: 120px;
+    border: 1px solid black;
+    margin: 2px;
+    overflow: hidden;
 }
