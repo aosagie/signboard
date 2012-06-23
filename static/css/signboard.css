@@ -3,14 +3,19 @@
 }
 
 .columnGroup {
+    float: left;
 }
 
 .column {
-    width: 100px;
+    width: 185px;
+    border: 1px solid red;
+    float: left;
 }
 
 .cardList {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .card {
@@ -19,4 +24,8 @@
     border: 1px solid black;
     margin: 2px;
     overflow: hidden;
+}
+
+.clear {
+    clear: both;
 }
