@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Signboard{% endblock %}
+{% block head %}
+    <script src="{{ url_for('static', filename='js/lib/angular-1.0.0.js') }}"></script>
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.21.custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/signboardctrls.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signboard.css') }}">
+{% endblock %}
+{% block content %}
+    <noscript>
+        <!--No unobtrusive javascript to fallback on, so get rid of everything if javascript is disabled-->
+        <style type="text/css">
+            .appContainer { display: none; }
+        </style>
+        <span>This application requires javascript</span>
+    </noscript>
+
+    <div class="appContainer">
+        Hello Universe?
+    </div>
+{% endblock %}
