@@ -7,7 +7,7 @@
     margin: 2px;
 }
 
-h2 {
+.board h2, .board h3 {
     text-align: center;
 }
 
@@ -16,10 +16,6 @@ h2 {
     height: 350px;
     border: 1px solid red; /* Temporary, for visualization purposes. */
     float: left;
-}
-
-h3 {
-    text-align: center;
 }
 
 .cardList {
