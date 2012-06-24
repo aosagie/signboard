@@ -20,19 +20,19 @@
     <div data-ng-app="Signboard" class="appContainer">
         <script type="text/ng-template" id="columnGroupTemplate">
             <span>
-                <h2>{* model.name *}</h2>
-                <div data-ng-repeat="column in model.columns" class="column">
-                    <column model="column" cards="cards">
+                <h2>{* columnGroup.name *}</h2>
+                <div data-ng-repeat="column in columnGroup.columns" class="column">
+                    <column/>
                 </div>
             </span>
         </script>
 
         <script type="text/ng-template" id="columnTemplate">
             <span>
-                <h3>{* model.name *}</h3>
+                <h3>{* column.name *}</h3>
                 <ul class="cardList">
-                    <li data-ng-repeat="id in model.cardIds" class="card">
-                        <card model="cards[id]"/>
+                    <li data-ng-repeat="id in column.cardIds" class="card">
+                        <card/>
                     </li>
                 </ul>
             </span>
@@ -40,14 +40,14 @@
 
         <script type="text/ng-template" id="cardTemplate">
             <div class="card">
-                <h4 data-ng-click="toggleCollapsed()">{* model.name *}</h4>
-                <div data-ng-hide="collapsed">{* model.description *}</div>
+                <h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4>
+                <div data-ng-hide="collapsed">{* signboard.cards[id].description *}</div>
             </div>
         </script>
 
         <div data-ng-controller="BoardCtrl" class="board">
             <div data-ng-repeat="columnGroup in signboard.columnGroups" class="columnGroup">
-                <column-group model="columnGroup" cards="signboard.cards"/>
+                <column-group/>
             </div>
             <div class="clear"/>
             <br/>

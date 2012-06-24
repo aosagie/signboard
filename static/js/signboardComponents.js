@@ -3,10 +3,6 @@ angular.module("SignboardComponents", [])
         return {
             restrict: "E",
             templateUrl: "columnGroupTemplate",
-            scope: {
-                model: "=",
-                cards: "="
-            },
             replace: true
         };
     })
@@ -14,10 +10,6 @@ angular.module("SignboardComponents", [])
         return {
             restrict: "E",
             templateUrl: "columnTemplate",
-            scope: {
-                model: "=",
-                cards: "="
-            },
             replace: true,
             link: function(scope, element, attrs) {
                 $(element).find(".cardList").disableSelection().sortable({
@@ -30,9 +22,6 @@ angular.module("SignboardComponents", [])
         return {
             restrict: "E",
             templateUrl: "cardTemplate",
-            scope: {
-                model: "="
-            },
             replace: true,
             controller: function($scope) {
 
