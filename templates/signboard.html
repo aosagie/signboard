@@ -31,8 +31,8 @@
 
         <script type="text/ng-template" id="cardTemplate">
             <div class="card">
-                <h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4>
-                <div data-ng-hide="collapsed">{* signboard.cards[id].description *}</div>
+                <div class="title"><h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4></div>
+                <div data-ng-hide="collapsed" class="body">{* signboard.cards[id].description *}</div>
             </div>
         </script>
 

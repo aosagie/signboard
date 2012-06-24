@@ -33,9 +33,19 @@
 
 .card {
     max-height: 120px;
-    border: 1px solid black; /* Temporary, for visualization purposes. */
     margin: 2px;
     overflow: hidden;
+    border: 1px solid black;
+}
+
+.card > .title {
+    /*background-color: #009900;*/
+    /*color: #ffffff;*/
+}
+
+.card > .body {
+    /*background-color: #00ff00;*/
+    /*font-weight: bold;*/
 }
 
 .clear {
