@@ -17,13 +17,34 @@
         <span>This application requires javascript</span>
     </noscript>
 
-    <div class="appContainer">
-        <div data-ng-app="Signboard" data-ng-controller="BoardCtrl" class="board">
+    <div data-ng-app="Signboard" class="appContainer">
+        <script type="text/ng-template" id="columnGroupTemplate">
+            <span>
+                <h2>{* model.name *}</h2>
+                <div data-ng-repeat='column in model.columns' class='column'>
+                    <h3>{* column.name *}</h3>
+                    <ul class='cardList'>
+                        <li data-ng-repeat='id in column.cardIds' class='card'>
+                            <card model='cards[id]'/>
+                        </li>
+                    </ul>
+                </div>
+            </span>
+        </script>
+
+        <script type="text/ng-template" id="cardTemplate">
+            <div class='card'>
+                <h4 data-ng-click='toggleCollapsed()'>{* model.name *}</h4>
+                <div data-ng-hide='collapsed'>{* model.description *}</div>
+            </div>
+        </script>
+
+        <div data-ng-controller="BoardCtrl" class="board">
             <div data-ng-repeat="columnGroup in signboard.columnGroups" class="columnGroup">
                 <column-group model="columnGroup" cards="signboard.cards"/>
             </div>
             <div class="clear"/>
-
+            <br/>
             <pre>{* signboard | json *}</pre>
         </div>
     </div>

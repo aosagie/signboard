@@ -28,6 +28,12 @@ h3 {
     padding: 0;
 }
 
+.cardList > li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 .card {
     max-height: 120px;
     border: 1px solid black; /* Temporary, for visualization purposes. */

@@ -22,7 +22,7 @@
             "columns": [
                 {
                     "max": 10,
-                    "cardIds": [ "id1" ]
+                    "cardIds": [ "id1", "id2" ]
                 }
             ]
         },
