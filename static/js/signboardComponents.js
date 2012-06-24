@@ -1,20 +1,15 @@
 angular.module("SignboardComponents", [])
-    .directive("columnGroup", function() {
-        return {
-            restrict: "E",
-            templateUrl: "columnGroupTemplate",
-            replace: true
-        };
-    })
     .directive("column", function() {
         return {
             restrict: "E",
             templateUrl: "columnTemplate",
             replace: true,
             link: function(scope, element, attrs) {
+
                 $(element).find(".cardList").disableSelection().sortable({
                     connectWith: ".cardList"
                 });
+
             }
         };
     })
@@ -29,11 +24,6 @@ angular.module("SignboardComponents", [])
                     $scope.collapsed = !$scope.collapsed;
                 };
 
-            },
-            link: function(scope, element, attrs) {
-                //$(element).closest(".cardList").disableSelection().sortable({
-                    //connectWith: ".cardList"
-                //});
             }
         };
     });
