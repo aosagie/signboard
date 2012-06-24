@@ -13,12 +13,13 @@
 
 .column {
     width: 185px;
-    height: 350px;
     border: 1px solid red; /* Temporary, for visualization purposes. */
     float: left;
+    overflow: hidden;
 }
 
 .cardList {
+    height: 350px;
     list-style: none;
     margin: 0;
     padding: 0;

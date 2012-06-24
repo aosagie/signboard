@@ -15,5 +15,6 @@ function BoardCtrl($scope, $http, $log) {
 }
 
 angular.module('Signboard', ["SignboardComponents"], function ($interpolateProvider) {
-    $interpolateProvider.startSymbol("{*").endSymbol("*}"); //Default symbols conflict with Jinja2
+    //Replace old symbol because default symbols conflict with Jinja2
+    $interpolateProvider.startSymbol("{*").endSymbol("*}");
 });

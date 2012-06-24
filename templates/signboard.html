@@ -21,21 +21,27 @@
         <script type="text/ng-template" id="columnGroupTemplate">
             <span>
                 <h2>{* model.name *}</h2>
-                <div data-ng-repeat='column in model.columns' class='column'>
-                    <h3>{* column.name *}</h3>
-                    <ul class='cardList'>
-                        <li data-ng-repeat='id in column.cardIds' class='card'>
-                            <card model='cards[id]'/>
-                        </li>
-                    </ul>
+                <div data-ng-repeat="column in model.columns" class="column">
+                    <column model="column" cards="cards">
                 </div>
             </span>
         </script>
 
+        <script type="text/ng-template" id="columnTemplate">
+            <span>
+                <h3>{* model.name *}</h3>
+                <ul class="cardList">
+                    <li data-ng-repeat="id in model.cardIds" class="card">
+                        <card model="cards[id]"/>
+                    </li>
+                </ul>
+            </span>
+        </script>
+
         <script type="text/ng-template" id="cardTemplate">
-            <div class='card'>
-                <h4 data-ng-click='toggleCollapsed()'>{* model.name *}</h4>
-                <div data-ng-hide='collapsed'>{* model.description *}</div>
+            <div class="card">
+                <h4 data-ng-click="toggleCollapsed()">{* model.name *}</h4>
+                <div data-ng-hide="collapsed">{* model.description *}</div>
             </div>
         </script>
 

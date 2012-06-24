@@ -7,8 +7,22 @@ angular.module("SignboardComponents", [])
                 model: "=",
                 cards: "="
             },
+            replace: true
+        };
+    })
+    .directive("column", function() {
+        return {
+            restrict: "E",
+            templateUrl: "columnTemplate",
+            scope: {
+                model: "=",
+                cards: "="
+            },
             replace: true,
-            controller: function($scope) {
+            link: function(scope, element, attrs) {
+                $(element).find(".cardList").disableSelection().sortable({
+                    connectWith: ".cardList"
+                });
             }
         };
     })
@@ -28,7 +42,9 @@ angular.module("SignboardComponents", [])
 
             },
             link: function(scope, element, attrs) {
-                $(element).closest(".cardList").sortable().disableSelection();
+                //$(element).closest(".cardList").disableSelection().sortable({
+                    //connectWith: ".cardList"
+                //});
             }
         };
     });
