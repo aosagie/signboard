@@ -22,7 +22,7 @@
             <span>
                 <h3>{* column.name *}</h3>
                 <ul class="cardList">
-                    <li data-ng-repeat="id in column.cardIds" class="card">
+                    <li data-ng-repeat="id in column.cardIds">
                         <card/>
                     </li>
                 </ul>
@@ -30,7 +30,7 @@
         </script>
 
         <script type="text/ng-template" id="cardTemplate">
-            <div class="card">
+            <div class="card" data-card-id="{* id *}">
                 <div class="title"><h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4></div>
                 <div data-ng-hide="collapsed" class="body">{* signboard.cards[id].description *}</div>
             </div>
