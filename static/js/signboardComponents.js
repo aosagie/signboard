@@ -8,6 +8,7 @@ angular.module("SignboardComponents", [])
 
                 $(iElement).find(".cardList").disableSelection().sortable({
                     connectWith: ".cardList",
+                    //The following methods are concerned with syncing the data models with updated changes from the GUI
                     receive: function(event, ui) { //Handles when the column receives a card from another column
                         var cardId = ui.item.children().data("card-id");
 
@@ -20,6 +21,11 @@ angular.module("SignboardComponents", [])
 
                         scope.$apply(function() {
                             scope.removeCard(cardId);
+                        });
+                    },
+                    stop: function(event, ui) { //Handles when re-ordering of cards in a column has been completed
+                        scope.$apply(function() {
+                            scope.syncCards(ui);
                         });
                     }
                 });
@@ -40,6 +46,16 @@ angular.module("SignboardComponents", [])
                             $scope.column.cardIds.splice(i, 1);
                         }
                     }
+                };
+
+                $scope.syncCards = function(ui) {
+                    var cardList = ui.item.parent();
+
+                    $scope.column.cardIds = [];
+                    cardList.find(".card").each(function(index, element) {
+                        var cardId = $(element).data("card-id");
+                        $scope.column.cardIds.push(cardId);
+                    });
                 };
 
             }
