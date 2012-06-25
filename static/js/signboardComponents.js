@@ -8,25 +8,14 @@ angular.module("SignboardComponents", [])
 
                 $(iElement).find(".cardList").disableSelection().sortable({
                     connectWith: ".cardList",
-                    //The following methods are concerned with syncing the data models with updated changes from the GUI
-                    receive: function(event, ui) { //Handles when the column receives a card from another column
-                        var cardId = ui.item.children().data("card-id");
-
-                        scope.$apply(function() {
-                            scope.addCard(cardId);
-                        });
+                    cursor: "move",
+                    //The following methods sync the data model with the updated DOM
+                    update: function(event, ui) {
+                        var domList = $(event.target);
+                        scope.syncCards(domList);
                     },
-                    remove: function(event, ui) { //Handles when the column loses a card to another column
-                        var cardId = ui.item.children().data("card-id");
-
-                        scope.$apply(function() {
-                            scope.removeCard(cardId);
-                        });
-                    },
-                    stop: function(event, ui) { //Handles when re-ordering of cards in a column has been completed
-                        scope.$apply(function() {
-                            scope.syncCards(ui);
-                        });
+                    stop: function(event, ui) {
+                        scope.$apply();
                     }
                 });
 
@@ -48,13 +37,12 @@ angular.module("SignboardComponents", [])
                     }
                 };
 
-                $scope.syncCards = function(ui) {
-                    var cardList = ui.item.parent();
-
+                //Re-populates the column model's array of cardIds based on their ordering in the div
+                $scope.syncCards = function(domList) {
                     $scope.column.cardIds = [];
-                    cardList.find(".card").each(function(index, element) {
+                    domList.find(".card").each(function(index, element) {
                         var cardId = $(element).data("card-id");
-                        $scope.column.cardIds.push(cardId);
+                        $scope.addCard(cardId);
                     });
                 };
 
