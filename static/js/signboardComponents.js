@@ -22,7 +22,7 @@ angular.module("SignboardComponents", [])
                 });
                 $element.find("button").colorbox({
                     inline: true,
-                    href: $element.find(".card-dialog")
+                    href: $element.find(".card-create-dialog")
                 });
 
             },
@@ -41,6 +41,11 @@ angular.module("SignboardComponents", [])
                             $scope.column.cardIds.splice(i, 1);
                         }
                     }
+                };
+
+                $scope.newCard = function(title, description) {
+                    console.log(title);
+                    console.log(description);
                 };
 
                 //Re-populates the column model's array of cardIds based on their ordering in the div

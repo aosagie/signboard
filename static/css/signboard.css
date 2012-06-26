@@ -50,6 +50,10 @@
     /*text-overflow: ellipsis;*/
 }
 
+.card-create-dialog textarea {
+    resize: none;
+}
+
 .clear {
     clear: both;
 }
