@@ -1,10 +1,8 @@
 .board {
-    margin: auto;
 }
 
 .column-group {
     float: left;
-    margin: 2px;
 }
 
 .board h2, .board h3 {
@@ -13,13 +11,14 @@
 
 .column {
     width: 185px;
-    border: 1px solid red; /* Temporary, for visualization purposes. */
+    height: 350px;
+    border-right: 2px solid gray;
     float: left;
     overflow: hidden;
 }
 
 .card-list {
-    height: 350px;
+    height: 120px; /*Need some room to drag a new card to an empty list*/
     list-style: none;
     margin: 0;
     padding: 0;

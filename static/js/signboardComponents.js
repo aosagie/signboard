@@ -48,7 +48,12 @@ angular.module("SignboardComponents", [])
                     console.log(description);
                 };
 
-                //Re-populates the column model's array of cardIds based on their ordering in the div
+                $scope.clearModel = function() {
+                    $scope.title = "";
+                    $scope.description = "";
+                };
+
+                //Re-populates the column model's array of cardIds based on their ordering in the DOM
                 $scope.syncCards = function(domList) {
                     $scope.column.cardIds = [];
                     domList.find(".card").each(function(index, element) {

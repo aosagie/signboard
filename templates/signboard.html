@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Signboard{% endblock %}
 {% block head %}
-    <script src="{{ url_for('static', filename='js/lib/angular-1.0.0.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/angular-1.0.1.js') }}"></script>
     {{ super() }}
     <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.21.custom.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lib/jquery.colorbox.js') }}"></script>
@@ -19,9 +19,19 @@
         <span>This application requires javascript</span>
     </noscript>
 
-    <div data-ng-app="Signboard" class="appContainer">
+    <div data-ng-app="Signboard" data-ng-cloak class="appContainer">
         <script type="text/ng-template" id="column-template">
             <span>
+                <h3>{* column.name *}</h3>
+                <button data-ng-show="$parent.$index == 0 && $index == 0" data-ng-click="clearModel()" class="btn btn-primary">
+                    <i class="icon-plus icon-white"></i> New Card
+                </button>
+                <ul class="card-list">
+                    <li data-ng-repeat="id in column.cardIds">
+                        <card/>
+                    </li>
+                </ul>
+
                 <div style="display:none;"> <!--Modal dialog only shown through colorbox-->
                     <div class="card-create-dialog">
                         <form class="well">
@@ -30,20 +40,12 @@
                             <textarea data-ng-model="description" class="input-xlarge" placeholder="Description" rows="7">
                             </textarea>
                             <br/>
-                            <button data-ng-click="newCard(title, description)" type="submit" class="btn">Submit</button>
+                            <button data-ng-click="newCard(title, description)" type="submit" class="btn">
+                                <i class="icon-ok-sign"></i> Submit
+                            </button>
                         </form>
                     </div>
                 </div>
-
-                <h3>{* column.name *}</h3>
-                <button data-ng-show="$parent.$index == 0 && $index == 0" class="btn btn-primary">
-                    <i class="icon-plus icon-white"></i> New Card
-                </button>
-                <ul class="card-list">
-                    <li data-ng-repeat="id in column.cardIds">
-                        <card/>
-                    </li>
-                </ul>
             </span>
         </script>
 
@@ -57,6 +59,7 @@
         <div data-ng-controller="BoardCtrl" class="board">
             <div data-ng-repeat="columnGroup in signboard.columnGroups" class="column-group">
                 <h2>{* columnGroup.name *}</h2>
+                <hr/>
                 <div data-ng-repeat="column in columnGroup.columns" class="column">
                     <column/>
                 </div>
