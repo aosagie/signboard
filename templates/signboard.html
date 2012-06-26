@@ -4,6 +4,7 @@
     <script src="{{ url_for('static', filename='js/lib/angular-1.0.0.js') }}"></script>
     {{ super() }}
     <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.21.custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jquery.colorbox.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signboardCtrls.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signboardComponents.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/signboard.css') }}">
@@ -18,10 +19,19 @@
     </noscript>
 
     <div data-ng-app="Signboard" class="appContainer">
-        <script type="text/ng-template" id="columnTemplate">
+        <script type="text/ng-template" id="column-template">
             <span>
+                <div style="display:none;">
+                    <div class="card-dialog" data-ng-click="test()">
+                        Hello Universe
+                    </div>
+                </div>
+
                 <h3>{* column.name *}</h3>
-                <ul class="cardList">
+                <button data-ng-click="newCard()" data-ng-show="$parent.$index == 0 && $index == 0" class="btn btn-primary">
+                    <i class="icon-plus icon-white"></i> New Card
+                </button>
+                <ul class="card-list">
                     <li data-ng-repeat="id in column.cardIds">
                         <card/>
                     </li>
@@ -29,7 +39,7 @@
             </span>
         </script>
 
-        <script type="text/ng-template" id="cardTemplate">
+        <script type="text/ng-template" id="card-template">
             <div class="card" data-card-id="{* id *}">
                 <div class="title"><h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4></div>
                 <div data-ng-hide="collapsed" class="body">{* signboard.cards[id].description *}</div>
@@ -37,7 +47,7 @@
         </script>
 
         <div data-ng-controller="BoardCtrl" class="board">
-            <div data-ng-repeat="columnGroup in signboard.columnGroups" class="columnGroup">
+            <div data-ng-repeat="columnGroup in signboard.columnGroups" class="column-group">
                 <h2>{* columnGroup.name *}</h2>
                 <div data-ng-repeat="column in columnGroup.columns" class="column">
                     <column/>

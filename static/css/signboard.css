@@ -2,7 +2,7 @@
     margin: auto;
 }
 
-.columnGroup {
+.column-group {
     float: left;
     margin: 2px;
 }
@@ -18,14 +18,14 @@
     overflow: hidden;
 }
 
-.cardList {
+.card-list {
     height: 350px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.cardList > li {
+.card-list > li {
     margin: 0;
     padding: 0;
     border: 0;
@@ -41,11 +41,13 @@
 .card > .title {
     /*background-color: #009900;*/
     /*color: #ffffff;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .card > .body {
     /*background-color: #00ff00;*/
     /*font-weight: bold;*/
+    /*text-overflow: ellipsis;*/
 }
 
 .clear {

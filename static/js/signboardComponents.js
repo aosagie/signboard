@@ -2,21 +2,27 @@ angular.module("SignboardComponents", [])
     .directive("column", function() {
         return {
             restrict: "E",
-            templateUrl: "columnTemplate",
+            templateUrl: "column-template",
             replace: true,
             link: function(scope, iElement, iAttrs) {
 
-                $(iElement).find(".cardList").disableSelection().sortable({
-                    connectWith: ".cardList",
+                var $element = $(iElement);
+
+                $element.find(".card-list").disableSelection().sortable({
+                    connectWith: ".card-list",
                     cursor: "move",
                     //The following methods sync the data model with the updated DOM
                     update: function(event, ui) {
-                        var domList = $(event.target);
-                        scope.syncCards(domList);
+                        var listDom = $(event.target);
+                        scope.syncCards(listDom);
                     },
                     stop: function(event, ui) {
                         scope.$apply();
                     }
+                });
+                $element.find("button").colorbox({
+                    inline: true,
+                    href: $element.find(".card-dialog")
                 });
 
             },
@@ -52,7 +58,7 @@ angular.module("SignboardComponents", [])
     .directive("card", function() {
         return {
             restrict: "E",
-            templateUrl: "cardTemplate",
+            templateUrl: "card-template",
             replace: true,
             controller: function($scope) {
 
