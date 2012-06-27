@@ -35,6 +35,11 @@
     margin: 2px;
     overflow: hidden;
     border: 1px solid black;
+    border-radius: 5px;
+}
+
+.card > .header {
+    float: right;
 }
 
 .card > .title {

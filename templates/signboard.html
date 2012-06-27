@@ -23,7 +23,7 @@
         <script type="text/ng-template" id="column-template">
             <span>
                 <h3>{* column.name *}</h3>
-                <button data-ng-show="$parent.$index == 0 && $index == 0" data-ng-click="clearModel()" class="btn btn-primary">
+                <button data-ng-show="$parent.$index == 0 && $index == 0" data-ng-click="clearModel()" class="btn btn-primary new-card">
                     <i class="icon-plus icon-white"></i> New Card
                 </button>
                 <ul class="card-list">
@@ -40,7 +40,7 @@
                             <textarea data-ng-model="description" class="input-xlarge" placeholder="Description" rows="7">
                             </textarea>
                             <br/>
-                            <button data-ng-click="newCard(title, description)" type="submit" class="btn">
+                            <button data-ng-click="newCard(title, description)" type="submit" class="btn submit-card">
                                 <i class="icon-ok-sign"></i> Submit
                             </button>
                         </form>
@@ -51,8 +51,15 @@
 
         <script type="text/ng-template" id="card-template">
             <div class="card" data-card-id="{* id *}">
-                <div class="title"><h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4></div>
-                <div data-ng-hide="collapsed" class="body">{* signboard.cards[id].description *}</div>
+                <div class="header">
+                    <i data-ng-click="removeCard(id)" class="icon-remove"></i>
+                </div>
+                <div class="title">
+                    <h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4>
+                </div>
+                <div data-ng-hide="collapsed" class="body">
+                    {* signboard.cards[id].description *}
+                </div>
             </div>
         </script>
 

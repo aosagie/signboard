@@ -20,9 +20,12 @@ angular.module("SignboardComponents", [])
                         scope.$apply();
                     }
                 });
-                $element.find("button").colorbox({
+                $element.find("button.new-card").colorbox({
                     inline: true,
                     href: $element.find(".card-create-dialog")
+                });
+                $element.find("button.submit-card").click(function() {
+                    $.fn.colorbox.close();
                 });
 
             },
@@ -43,9 +46,15 @@ angular.module("SignboardComponents", [])
                     }
                 };
 
-                $scope.newCard = function(title, description) {
-                    console.log(title);
-                    console.log(description);
+                $scope.newCard = function(name, description) {
+                    //Temp way to gen an id. Doesn't work in <IE9. AJAX a GUID in from the server
+                    var id = Object.keys($scope.signboard.cards).length + 1;
+
+                    $scope.signboard.cards[id] = {
+                        name: name,
+                        description: description
+                    };
+                    $scope.addCard(id);
                 };
 
                 $scope.clearModel = function() {
