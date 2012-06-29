@@ -11,7 +11,7 @@
 
 .column {
     width: 185px;
-    height: 350px;
+    min-height: 350px; /*TODO: get column's div to grow in the y direction*/
     border-right: 2px solid gray;
     float: left;
     overflow: hidden;
