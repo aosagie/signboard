@@ -25,7 +25,7 @@ angular.module("SignboardComponents", [])
                     href: $element.find(".card-create-dialog")
                 });
                 $element.find("button.submit-card").click(function() {
-                    $.fn.colorbox.close();
+                    //$.fn.colorbox.close();
                 });
 
             },
