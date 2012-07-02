@@ -2,10 +2,7 @@
 (function() {
 "use strict";
 
-var signboard = angular.module('signboard', ["signboard.components", "signboard.services"], function ($interpolateProvider) {
-  //Replace old symbol because default symbols conflict with Jinja2
-  $interpolateProvider.startSymbol("{*").endSymbol("*}");
-});
+var signboard = angular.module('signboard', ["signboard.components", "signboard.services"]);
 
 signboard.controller("BoardCtrl", function ($scope, $http, $log, SignboardService) {
   $scope.signboard = {};
@@ -19,6 +16,11 @@ signboard.controller("BoardCtrl", function ($scope, $http, $log, SignboardServic
   };
 
   $scope.loadSignboard();
+});
+
+signboard.config(function ($interpolateProvider) {
+  //Replace old symbol because default symbols conflict with Jinja2
+  $interpolateProvider.startSymbol("{*").endSymbol("*}");
 });
 
 }());
