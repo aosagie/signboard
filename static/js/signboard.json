@@ -1,6 +1,7 @@
 {
   "name": "My Kanban Board",
   "creationDate": 1340478531851,
+  "updateDate": 1340478531851,
   "cards": {
     "id1": {
       "name": "Web-based Kanban",
