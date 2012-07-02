@@ -7,7 +7,8 @@
       "name": "Web-based Kanban",
       "creationDate": 1340478531851,
       "updateDate": 1340478531851,
-      "description": "A Kanban board using Flask and AngularJS"
+      "description": "A Kanban board using Flask and AngularJS",
+      "history": []
     },
     "id2": {
       "name": "UX Recorder",

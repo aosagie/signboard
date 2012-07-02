@@ -64,10 +64,10 @@
         </script>
 
         <div data-ng-controller="BoardCtrl" data-ng-cloak class="board">
-            <div data-ng-repeat="columnGroup in signboard.columnGroups" class="column-group">
+            <div data-ng-repeat="columnGroup in signboard.columnGroups" data-group-index="{* $index *}" class="column-group">
                 <h2>{* columnGroup.name *}</h2>
                 <hr/>
-                <div data-ng-repeat="column in columnGroup.columns" class="column">
+                <div data-ng-repeat="column in columnGroup.columns" data-column-index="{* $index *}" class="column">
                     <column/>
                 </div>
             </div>

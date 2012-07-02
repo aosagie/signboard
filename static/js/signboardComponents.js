@@ -15,13 +15,29 @@ components.directive("column", function() {
       $element.find(".card-list").disableSelection().sortable({
         connectWith: ".card-list",
         cursor: "move",
-        //The following methods sync the data model with the updated DOM
         update: function(event, ui) {
           var listDom = $(event.target);
-          scope.syncCards(listDom);
+          scope.syncCards(listDom); //Sync model with the updated DOM
         },
         stop: function(event, ui) {
-          scope.$apply();
+          scope.$apply(); //Apply synced changes to the model
+        },
+        receive: function(event, ui) {
+          //Keeping track of every card's movement history by prepending history entries
+          //Keep in mind, the latest element of this history might get inconsistent with the cards a column reports it contains
+          var cardId = ui.item.find(".card").data("card-id");
+          if (!scope.signboard.cards[cardId].history) {
+            scope.signboard.cards[cardId].history = [];
+          }
+          var historyEntry = {
+            type: undefined, //For now, there's only one type, card movement
+            date: new Date().getTime(),
+            data: {
+              columnGroup: ui.item.parents(".column-group").data("group-index"),
+              column: ui.item.parents(".column").data("column-index")
+            }
+          };
+          scope.signboard.cards[cardId].history = [historyEntry].concat(scope.signboard.cards[cardId].history);
         }
       });
       $element.find("button.new-card").colorbox({
