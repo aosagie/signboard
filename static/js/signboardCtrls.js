@@ -1,6 +1,11 @@
 /*global angular:false*/
 "use strict";
 
+var controllers = angular.module('signboard', ["signboard.components", "signboard.services"], function ($interpolateProvider) {
+  //Replace old symbol because default symbols conflict with Jinja2
+  $interpolateProvider.startSymbol("{*").endSymbol("*}");
+});
+
 function BoardCtrl($scope, $http, $log, SignboardService) {
 
   $scope.signboard = {};
@@ -16,8 +21,3 @@ function BoardCtrl($scope, $http, $log, SignboardService) {
   $scope.loadSignboard();
 
 }
-
-angular.module('Signboard', ["signboard.components", "signboard.services"], function ($interpolateProvider) {
-  //Replace old symbol because default symbols conflict with Jinja2
-  $interpolateProvider.startSymbol("{*").endSymbol("*}");
-});
