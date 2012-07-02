@@ -1,4 +1,7 @@
-var components = angular.module("SignboardComponents", []);
+/*global angular:false, $:false*/
+"use strict";
+
+var components = angular.module("signboard.components", []);
 
 components.directive("column", function() {
   return {
