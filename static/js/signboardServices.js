@@ -1,4 +1,5 @@
 /*global angular:false, $:false, localStorage:false*/
+(function() {
 "use strict";
 
 var services = angular.module("signboard.services", []);
@@ -8,7 +9,7 @@ services.factory("SignboardService", function ($location, $log) {
   var queryId = $location.search().id;
 
   return {
-    get: function(id) { 
+    get: function(id) {
       if (!id) {
         $log.log("No id specified");
       } else {
@@ -39,3 +40,5 @@ services.factory("SignboardService", function ($location, $log) {
     }
   };
 });
+
+}());

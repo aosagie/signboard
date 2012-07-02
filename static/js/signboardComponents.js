@@ -1,4 +1,5 @@
 /*global angular:false, $:false*/
+(function() {
 "use strict";
 
 var components = angular.module("signboard.components", []);
@@ -110,3 +111,5 @@ components.directive("card", function() {
     }
   };
 });
+
+}());
