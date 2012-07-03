@@ -5,6 +5,7 @@
     {{ super() }}
     <script src="{{ url_for('static', filename='js/lib/jquery-ui-1.8.21.custom.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lib/jquery.colorbox.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/d3.v2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signboardCtrls.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signboardComponents.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signboardServices.js') }}"></script>
@@ -38,7 +39,7 @@
                         <form class="well">
                             <input data-ng-model="title" type="text" class="span3" placeholder="Title">
                             <br/>
-                            <textarea data-ng-model="description" class="input-xlarge" placeholder="Description" rows="7">
+                            <textarea data-ng-model="description" class="input-xlarge" placeholder="Description" rows="7"/>
                             </textarea>
                             <br/>
                             <button data-ng-click="newCard(title, description)" type="submit" class="btn submit-card">
@@ -53,7 +54,7 @@
         <script type="text/ng-template" id="card-template">
             <div class="card" data-card-id="{* id *}">
                 <div class="header">
-                    <i data-ng-click="removeCard(id)" class="icon-remove"></i>
+                    <i data-ng-click="removeCard(id, true)" class="icon-remove"></i>
                 </div>
                 <div class="title">
                     <h4 data-ng-click="toggleCollapsed()">{* signboard.cards[id].name *}</h4>

@@ -4,9 +4,12 @@
 
 var services = angular.module("signboard.services", []);
 
+//TODO: get data from SQLite and only use localStorage if that fails (e.g. offline mode)
 services.factory("SignboardService", function ($location, $log) {
+  //Prefixing id's before I store them so that there's no namespace conflicts in the localStorage object
   var prefix = "signboard_";
-  var queryId = $location.search().id;
+  //Getting 'id' queryString parameter (i.e. 123 from http://localhost:port/index.html?id=123)
+  var queryId = $location.search().id; 
 
   return {
     get: function(id) {

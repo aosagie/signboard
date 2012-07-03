@@ -8,11 +8,18 @@ signboard.controller("BoardCtrl", function ($scope, $http, $log, SignboardServic
   $scope.signboard = {};
 
   $scope.loadSignboard = function() {
-    //Loading from the filesystem from now. Using SQLite later.
-    $http.get("static/js/signboard.json").success(function(data, status) {
-      $scope.signboard = data;
-      $log.log("Successfully retrieved signboard data");
-    });
+    var signboard = SignboardService.getFromCurrentId();
+
+    if (signboard) {
+      $scope.signboard = signboard;
+    }
+    //TODO: get rid of the following bootstrapping from the file system
+    else {
+      $http.get("static/js/signboard.json").success(function(data, status) {
+        $log.log("Bootstrapping signboard data from the file system");
+        $scope.signboard = data;
+      });
+    }
   };
 
   $scope.loadSignboard();

@@ -22,6 +22,7 @@ components.directive("column", function() {
         },
         stop: function(event, ui) {
           scope.$apply(); //Apply synced changes to the model
+          scope.storeToCurrentId();
         },
         receive: function(event, ui) {
           //Keeping track of every card's movement history by prepending history entries
@@ -32,7 +33,7 @@ components.directive("column", function() {
           }
           var historyEntry = {
             type: undefined, //For now, there's only one type, card movement
-            date: new Date().getTime(),
+            time: new Date().getTime(),
             data: {
               columnGroup: ui.item.parents(".column-group").data("group-index"),
               column: ui.item.parents(".column").data("column-index")
@@ -46,24 +47,32 @@ components.directive("column", function() {
         href: $element.find(".card-create-dialog")
       });
       $element.find("button.submit-card").click(function() {
-        //$.fn.colorbox.close();
+        $.fn.colorbox.close();
       });
 
     },
-    controller: function($scope) {
+    controller: function($scope, SignboardService) {
 
-      $scope.addCard = function(cardId) {
+      $scope.addCard = function(cardId, store) {
         if (!$scope.column.cardIds) {
           $scope.column.cardIds = [];
         }
         $scope.column.cardIds.push(cardId);
+
+        if (store) {
+          SignboardService.storeToCurrentId();
+        }
       };
 
-      $scope.removeCard = function(cardId) {
+      $scope.removeCard = function(cardId, store) {
         for (var i = 0; i < $scope.column.cardIds.length; i++) {
           if ($scope.column.cardIds[i] === cardId) {
             $scope.column.cardIds.splice(i, 1);
           }
+        }
+
+        if (store) {
+          SignboardService.storeToCurrentId();
         }
       };
 
@@ -76,7 +85,7 @@ components.directive("column", function() {
           name: name,
           description: description
         };
-        $scope.addCard(id);
+        $scope.addCard(id, true);
       };
 
       $scope.clearModel = function() {
@@ -91,6 +100,10 @@ components.directive("column", function() {
           var cardId = $(element).data("card-id");
           $scope.addCard(cardId);
         });
+      };
+
+      $scope.storeToCurrentId = function() {
+        SignboardService.storeToCurrentId();
       };
 
     }
@@ -108,6 +121,17 @@ components.directive("card", function() {
         $scope.collapsed = !$scope.collapsed;
       };
 
+    }
+  };
+});
+
+components.directive("flowchart", function() {
+  return {
+    restrict: "E",
+    //templateUrl: "flowchart-template",
+    replace: true,
+    link: function(scope, iElement, iAttrs) {
+      //TODO: use d3 to implement a flow chart of card movement
     }
   };
 });
