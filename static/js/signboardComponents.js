@@ -60,7 +60,7 @@ components.directive("column", function() {
         $scope.column.cardIds.push(cardId);
 
         if (store) {
-          SignboardService.storeToCurrentId();
+          $scope.storeToCurrentId();
         }
       };
 
@@ -72,7 +72,7 @@ components.directive("column", function() {
         }
 
         if (store) {
-          SignboardService.storeToCurrentId();
+          $scope.storeToCurrentId();
         }
       };
 
