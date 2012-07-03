@@ -1,4 +1,4 @@
-/*global angular:false, $:false*/
+/*global angular:false, $:false*/ //Get JSHint to relax error reporting on certain globals
 (function() {
 "use strict";
 
