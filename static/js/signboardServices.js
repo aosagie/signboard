@@ -2,7 +2,7 @@
 (function() {
 "use strict";
 
-var services = angular.module("signboard.services", []);
+var services = angular.module("signboard.services", ["ngResource"]);
 
 //TODO: get data from SQLite and only use localStorage if that fails (e.g. offline mode)
 services.factory("SignboardService", function ($location, $log) {
