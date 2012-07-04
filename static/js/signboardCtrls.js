@@ -4,11 +4,12 @@
 
 var signboard = angular.module('signboard', ["signboard.components", "signboard.services"]);
 
-signboard.controller("BoardCtrl", function ($scope, $http, $log, SignboardService) {
+signboard.controller("BoardCtrl", function ($scope, $http, $log, BoardService) {
   $scope.signboard = {};
 
   $scope.loadSignboard = function() {
-    var signboard = SignboardService.getFromCurrentId();
+    //$scope.signboard = BoardService.getFromCurrentId();
+    var signboard = BoardService.getFromCurrentId();
 
     if (signboard) {
       $scope.signboard = signboard;

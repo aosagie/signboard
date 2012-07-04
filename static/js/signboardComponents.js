@@ -51,7 +51,7 @@ components.directive("column", function() {
       });
 
     },
-    controller: function($scope, SignboardService) {
+    controller: function($scope, BoardService) {
 
       $scope.addCard = function(cardId, store) {
         if (!$scope.column.cardIds) {
@@ -103,7 +103,7 @@ components.directive("column", function() {
       };
 
       $scope.storeToCurrentId = function() {
-        SignboardService.storeToCurrentId();
+        BoardService.storeToCurrentId();
       };
 
     }

@@ -1,5 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, g, render_template
+import sqlite3
+
 app = Flask(__name__)
+DATABASE = "static/db/database.db"
+
+
+@app.before_request
+def before_request():
+    g.db = sqlite3.connect(DATABASE)
+
+
+@app.teardown_request
+def teardown_request(exception):
+    if hasattr(g, 'db'):
+        g.db.close()
 
 
 @app.route("/")
