@@ -4,34 +4,33 @@
 
 var services = angular.module('signboard.services', ['ngResource']);
 
-services.factory('BoardService', function ($resource) {
-  return $resource('boards/:id', {}, {
+services.factory('BoardResource', function ($resource) {
+  return $resource('boards/:id', {id:'@id'}, {
     save: {
-      method: 'PUT'
+      method: 'PUT' //save defaults to POST but shouldn't a VERB on a specific id be an idempotent PUT?
     }
   });
 });
 
 services.factory('LocalBoardService', function ($log) {
   return {
-    getFromId: function(id) {
+    getById: function(id) {
       if (id) {
         if (localStorage[id]) return JSON.parse(localStorage[id]);
-        $log.log("No item for " + id);
+        $log.log('No localStorage item for ' + id);
       } else {
-        $log.log("No id specified");
+        $log.log('No localStorage id specified');
       }
-      return undefined;
     },
 
-    storeToId: function(id, item) {
+    saveById: function(id, item) {
       if (id) localStorage[id] = JSON.stringify(item);
-      else $log.log("Invalid id for storage");
+      else $log.log('No localStorage id specified');
     },
 
     removeById: function(id) {
       if (localStorage[id]) localStorage.removeItem(id);
-      else $log.log("No item for " + id);
+      else $log.log('No localStorage item for ' + id);
     }
   };
 });

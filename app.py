@@ -17,7 +17,7 @@ def index():
 
 
 @app.route('/boards/<int:id>', methods=['GET'])
-def boards(id):
+def get_board(id):
     cursor = g.db.execute('SELECT data FROM boards WHERE id = ?', (id,))
     row = cursor.fetchone()
     if (row is not None):
@@ -26,6 +26,14 @@ def boards(id):
         return jsonify(row['data'])
     else:
         abort(404)
+
+# TODO: implement this. Don't forget to strip the id from the request's data
+# object if it exists. It may exist when client side code needs to know where
+# to save the active record, but server side it should be removed since it's
+# stored in another column.
+@app.route('/boards/<int:id>', methods=['PUT'])
+def put_board(id):
+    return ''
 
 
 @app.before_request

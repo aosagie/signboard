@@ -51,7 +51,8 @@ components.directive('column', function() {
       });
 
     },
-    controller: function($scope, BoardService) {
+    controller: function($scope, $location, $log, BoardResource, LocalBoardService) {
+      var queryId = $location.search().id;
 
       $scope.addCard = function(cardId, store) {
         if (!$scope.column.cardIds) {
@@ -103,7 +104,17 @@ components.directive('column', function() {
       };
 
       $scope.storeToCurrentId = function() {
-        BoardService.storeToCurrentId();
+        if (queryId) {
+          BoardResource.save({'id': queryId},
+            function success() {
+            },
+            function error() {
+              $log.log('Could not PUT the board on the server. Saving to localStorage.');
+              LocalBoardService.saveById(queryId, $scope.signboard);
+            });
+        } else {
+          $log.log("No id specified");
+        }
       };
 
     }
