@@ -13,7 +13,26 @@ services.factory('BoardService', function ($resource) {
 });
 
 services.factory('LocalBoardService', function ($log) {
-  return { //TODO: get the old local storage from the repo
+  return {
+    getFromId: function(id) {
+      if (id) {
+        if (localStorage[id]) return JSON.parse(localStorage[id]);
+        $log.log("No item for " + id);
+      } else {
+        $log.log("No id specified");
+      }
+      return undefined;
+    },
+
+    storeToId: function(id, item) {
+      if (id) localStorage[id] = JSON.stringify(item);
+      else $log.log("Invalid id for storage");
+    },
+
+    removeById: function(id) {
+      if (localStorage[id]) localStorage.removeItem(id);
+      else $log.log("No item for " + id);
+    }
   };
 });
 
