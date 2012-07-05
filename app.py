@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, g, render_template, jsonify
+from flask import Flask, g, render_template, abort, jsonify
 # Creating a simple de-normalized, json-based database on top of a RDBMS
 import sqlite3
 import json
@@ -8,7 +8,7 @@ import json
 
 app = Flask(__name__)
 DATABASE = 'db/database.sqlite'
-sqlite3.register_converter("json", json.loads)
+sqlite3.register_converter("JSON", json.loads)
 
 
 @app.route('/')
@@ -18,7 +18,14 @@ def index():
 
 @app.route('/boards/<int:id>', methods=['GET'])
 def boards(id):
-    return jsonify({'id': id})
+    cursor = g.db.execute('SELECT data FROM boards WHERE id = ?', (id,))
+    row = cursor.fetchone()
+    if (row is not None):
+        # row['data'] was made a python object by the registered converter,
+        # then back into a json here. Could eventually be under performant?
+        return jsonify(row['data'])
+    else:
+        abort(404)
 
 
 @app.before_request
@@ -33,13 +40,18 @@ def teardown_request(exception):
 
 
 def connect_db():
-    return sqlite3.connect(DATABASE, detect_types=sqlite3.PARSE_DECLTYPES, row_factory=sqlite3.Row)
+    conn = sqlite3.connect(DATABASE, detect_types=sqlite3.PARSE_DECLTYPES)
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
 def init_db():
+    ''' Create the schema then dump some json data into the newly created table.
+    Not including a direct insert of the json in the sql so that I can maintain syntax highlighting and linting on the json file.
+    '''
     from contextlib import closing
 
-    with closing(sqlite3.connect(DATABASE)) as db:
+    with closing(connect_db()) as db:
         with app.open_resource('db/schema.sql') as schema:
             db.executescript(schema.read())
             with open('db/signboard.json') as data:

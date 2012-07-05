@@ -4,32 +4,24 @@
 
 var signboard = angular.module('signboard', ['signboard.components', 'signboard.services']);
 
-signboard.controller('BoardCtrl', function ($scope, $http, $log, BoardService) {
+signboard.controller('BoardCtrl', function ($scope, $location, $log, BoardService) {
   $scope.signboard = {};
 
   $scope.loadSignboard = function() {
-    var signboard = BoardService.getFromCurrentId(undefined, function error(results) {
-      signboard = results;
-    });
-
-    //$scope.signboard = BoardService.getFromCurrentId();
-    //if (signboard) {
-      //$scope.signboard = signboard;
-    //}
-    ////TODO: get rid of the following bootstrapping from the file system
-    //else {
-      //$http.get('db/signboard.json').success(function(data, status) {
-        //$log.log('Bootstrapping signboard data from the file system');
-        //$scope.signboard = data;
-      //});
-    //}
+    var queryId = $location.search().id;
+    $scope.signboard = BoardService.get({"id": queryId},
+      function success() {
+      },
+      function error() {
+        //TODO: signboard = LocalBoardStorage.get ...
+      });
   };
 
   $scope.loadSignboard();
 });
 
 signboard.config(function ($interpolateProvider) {
-  //Replace old symbol because default symbols conflict with Jinja2
+  //Make AnguljarJS use a symbol that doesn't conflict with Jinja2
   $interpolateProvider.startSymbol('{*').endSymbol('*}');
 });
 
