@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, g, render_template, abort, jsonify
+from flask import Flask, g, request, render_template, abort, jsonify
 # Creating a simple de-normalized, json-based database on top of a RDBMS
 import sqlite3
 import json
@@ -9,6 +9,7 @@ import json
 app = Flask(__name__)
 DATABASE = 'db/database.sqlite'
 sqlite3.register_converter("JSON", json.loads)
+#app.secret_key = 'some random secret key'
 
 
 @app.route('/')
@@ -27,15 +28,16 @@ def get_board(id):
     else:
         abort(404)
 
-# TODO: implement this. Don't forget to strip the id from the request's data
-# object if it exists. It may exist when client side code needs to know where
-# to save the active record, but server side it should be removed since it's
-# stored in another column.
+
 @app.route('/boards/<int:id>', methods=['PUT'])
 def put_board(id):
-    return ''
+    g.db.execute('UPDATE boards SET data = ? WHERE id = ?', (request.data, id))
+    g.db.commit()
+    return ''  # TODO: figure out the correct way to notify client this was successful
 
 
+# Using thread locals so that requests always have global access to a db
+# connection.
 @app.before_request
 def before_request():
     g.db = connect_db()
@@ -55,7 +57,8 @@ def connect_db():
 
 def init_db():
     ''' Create the schema then dump some json data into the newly created table.
-    Not including a direct insert of the json in the sql so that I can maintain syntax highlighting and linting on the json file.
+    Not including a direct insert of the json in the sql so that I can maintain
+    syntax highlighting and linting on the json file.
     '''
     from contextlib import closing
 

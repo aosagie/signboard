@@ -79,7 +79,7 @@ components.directive('column', function() {
 
       $scope.newCard = function(name, description) {
         if (!name && !description) return;
-        //Temp way to gen an id. Doesn't work in <IE9. AJAX a GUID in from the server
+        //TODO: This is a temp way to gen an id. Doesn't work in <IE9. AJAX a GUID in from the server
         var id = Object.keys($scope.signboard.cards).length + 1;
 
         $scope.signboard.cards[id] = {
@@ -105,7 +105,7 @@ components.directive('column', function() {
 
       $scope.storeToCurrentId = function() {
         if (queryId) {
-          BoardResource.save({'id': queryId},
+          BoardResource.save({'id': queryId}, $scope.signboard,
             function success() {
             },
             function error() {
