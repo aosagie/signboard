@@ -1,21 +1,21 @@
 /*global angular:false, $:false*/ //Get JSHint to relax error reporting on certain globals
 (function() {
-"use strict";
+'use strict';
 
-var components = angular.module("signboard.components", []);
+var components = angular.module('signboard.components', []);
 
-components.directive("column", function() {
+components.directive('column', function() {
   return {
-    restrict: "E",
-    templateUrl: "column-template",
+    restrict: 'E',
+    templateUrl: 'column-template',
     replace: true,
     link: function(scope, iElement, iAttrs) {
 
       var $element = $(iElement);
 
-      $element.find(".card-list").disableSelection().sortable({
-        connectWith: ".card-list",
-        cursor: "move",
+      $element.find('.card-list').disableSelection().sortable({
+        connectWith: '.card-list',
+        cursor: 'move',
         update: function(event, ui) {
           var listDom = $(event.target);
           scope.syncCards(listDom); //Sync model with the updated DOM
@@ -27,7 +27,7 @@ components.directive("column", function() {
         receive: function(event, ui) {
           //Keeping track of every card's movement history by prepending history entries
           //Keep in mind, the latest element of this history might get inconsistent with the cards a column reports it contains
-          var cardId = ui.item.find(".card").data("card-id");
+          var cardId = ui.item.find('.card').data('card-id');
           if (!scope.signboard.cards[cardId].history) {
             scope.signboard.cards[cardId].history = [];
           }
@@ -35,18 +35,18 @@ components.directive("column", function() {
             type: undefined, //For now, there's only one type, card movement
             time: new Date().getTime(),
             data: {
-              columnGroup: ui.item.parents(".column-group").data("group-index"),
-              column: ui.item.parents(".column").data("column-index")
+              columnGroup: ui.item.parents('.column-group').data('group-index'),
+              column: ui.item.parents('.column').data('column-index')
             }
           };
           scope.signboard.cards[cardId].history = [historyEntry].concat(scope.signboard.cards[cardId].history);
         }
       });
-      $element.find("button.new-card").colorbox({
+      $element.find('button.new-card').colorbox({
         inline: true,
-        href: $element.find(".card-create-dialog")
+        href: $element.find('.card-create-dialog')
       });
-      $element.find("button.submit-card").click(function() {
+      $element.find('button.submit-card').click(function() {
         $.fn.colorbox.close();
       });
 
@@ -89,15 +89,15 @@ components.directive("column", function() {
       };
 
       $scope.clearModel = function() {
-        $scope.title = "";
-        $scope.description = "";
+        $scope.title = '';
+        $scope.description = '';
       };
 
       //Re-populates the column model's array of cardIds based on their ordering in the DOM
       $scope.syncCards = function(domList) {
         $scope.column.cardIds = [];
-        domList.find(".card").each(function(index, element) {
-          var cardId = $(element).data("card-id");
+        domList.find('.card').each(function(index, element) {
+          var cardId = $(element).data('card-id');
           $scope.addCard(cardId);
         });
       };
@@ -110,10 +110,10 @@ components.directive("column", function() {
   };
 });
 
-components.directive("card", function() {
+components.directive('card', function() {
   return {
-    restrict: "E",
-    templateUrl: "card-template",
+    restrict: 'E',
+    templateUrl: 'card-template',
     replace: true,
     controller: function($scope) {
 
@@ -125,10 +125,10 @@ components.directive("card", function() {
   };
 });
 
-components.directive("flowchart", function() {
+components.directive('flowchart', function() {
   return {
-    restrict: "E",
-    //templateUrl: "flowchart-template",
+    restrict: 'E',
+    //templateUrl: 'flowchart-template',
     replace: true,
     link: function(scope, iElement, iAttrs) {
       //TODO: use d3 to implement a flow chart of card movement
