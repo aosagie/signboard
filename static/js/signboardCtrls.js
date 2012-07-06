@@ -8,7 +8,7 @@ signboard.controller('BoardCtrl', function ($scope, $location, $log, BoardResour
   $scope.signboard = {};
 
   $scope.loadSignboard = function() {
-    var queryId = $location.search().id;
+    var queryId = $location.search().id || 1; //TODO: remove this default value
 
     if (queryId) {
       //Attempt to RESTfully get a board. If that fails then load it from localStorage

@@ -23,9 +23,15 @@ To run the application simply type:
 
 Then navigate to:
 
-    http://localhost:<port>/#?id=1
+    http://localhost:<port>/
 
-The database comes preloaded with a test board at id=1. To reload that test board to its original state:
+Where <port> is the port announced when you ran `./app.py` (e.g. 5000)
+The database comes preloaded with a test board, which you navigate to when no id is specified in the query string. If other boards are in the database (or local storage), you can access them at:
+
+    http://localhost:<port>/#?id=<id>
+
+Where <id> is the id number (e.g. 1)
+To reload that test board to its original state:
 
     python
     $ import app; app.init_db()

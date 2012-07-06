@@ -52,7 +52,7 @@ components.directive('column', function() {
 
     },
     controller: function($scope, $location, $log, BoardResource, LocalBoardService) {
-      var queryId = $location.search().id;
+      var queryId = $location.search().id || 1; //TODO: remove this default value
 
       $scope.addCard = function(cardId, store) {
         if (!$scope.column.cardIds) {
