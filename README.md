@@ -23,5 +23,5 @@ Then navigate to:
 `http://localhost:<port>/#?id=1`
 
 The database comes preloaded with a test board at id=1. To reload that test board to its original state:
-`$ python
- > import app; app.init_db()`
+    $ python
+    $ import app; app.init_db()
