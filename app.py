@@ -7,7 +7,7 @@ import json
 
 
 app = Flask(__name__)
-DATABASE = 'db/database.sqlite'
+app.config['DATABASE_URL'] = 'db/database.sqlite'
 sqlite3.register_converter("JSON", json.loads)
 #app.secret_key = 'some random secret key'
 
@@ -32,7 +32,6 @@ def get_board(id):
 @app.route('/boards/<int:id>', methods=['PUT'])
 def put_board(id):
     g.db.execute('UPDATE boards SET data = ? WHERE id = ?', (request.data, id))
-    g.db.commit()
     return ''  # TODO: figure out the correct way to notify client this was successful
 
 
@@ -44,13 +43,17 @@ def before_request():
 
 
 @app.teardown_request
-def teardown_request(exception):
+def teardown_request(error=None):
     if hasattr(g, 'db'):
+        if error is None:
+            g.db.commit()
+        else:
+            g.db.rollback()
         g.db.close()
 
 
 def connect_db():
-    conn = sqlite3.connect(DATABASE, detect_types=sqlite3.PARSE_DECLTYPES)
+    conn = sqlite3.connect(app.config['DATABASE_URL'], detect_types=sqlite3.PARSE_DECLTYPES)
     conn.row_factory = sqlite3.Row
     return conn
 

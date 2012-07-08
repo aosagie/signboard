@@ -5,7 +5,7 @@
 var services = angular.module('signboard.services', ['ngResource']);
 
 services.factory('BoardResource', function ($resource) {
-  return $resource('boards/:id', {id:'@id'}, {
+  return $resource('boards/:id', {}, {
     save: {
       method: 'PUT' //save defaults to POST but shouldn't a VERB on a specific id be an idempotent PUT?
     }
